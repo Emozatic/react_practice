@@ -1,29 +1,22 @@
 import { useState } from "react";
 
 function Todo(){
-    const[todo, setTodo]= useState(["sample Test"]);
+    const[todo, setTodo]= useState ([]);
     const [newTodo, setNewTodo]= useState("");
 
-    let addNewTodo=()=>{
-        setTodo([...todo, setTodo]);
-        setNewTodo(" ");
+    let changetext=(event)=>{
+        setNewTodo(event.target.value)
     }
-
-    let updateTodoValue=(event)=>{
-        setNewTodo(event.target.value);
+    let settingTodo= (event)=>{
+        setTodo([...todo, newTodo]);
     }
     return(
         <>
-    <input type="text" value={newTodo} onchange={updateTodoValue}/>
-    <br /><br />
-    <button onClick={addNewTodo}>Add new Todo</button>
-    <br /><br />
-    <h4>Task todo</h4>
-    <ul>
-        {todo.map((todo)=>(
-            <li>{todo}</li>
-        ))}
-    </ul>
+    <input type="text" onChange={changetext} />
+    <ul>{todo.map((todo)=>(
+        <li>{todo}</li>
+    ))}</ul>
+    <button onClick={settingTodo}>Add</button>
         </>
     )
 }
