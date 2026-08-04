@@ -1,20 +1,24 @@
 import { useState } from "react";
+import {v4 as uuidv4} from "uuid";
 
 function Todo(){
-    const[todo, setTodo]= useState ([]);
-    const [newTodo, setNewTodo]= useState("");
-
+    const[todo, setTodo]= useState ([{task:"sample", id:uuidv4()}]);
+    const [newTodo, setNewTodo]= useState(""); 
+       
     let changetext=(event)=>{
         setNewTodo(event.target.value)
     }
-    let settingTodo= (event)=>{
-        setTodo([...todo, newTodo]);
+    let settingTodo=()=>{
+        setTodo((prevTodo, ))
     }
+   
     return(
         <>
     <input type="text" onChange={changetext} />
     <ul>{todo.map((todo)=>(
-        <li>{todo}</li>
+        
+        <li key={todo.id}>{todo.task}</li>
+        
     ))}</ul>
     <button onClick={settingTodo}>Add</button>
         </>
