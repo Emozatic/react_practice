@@ -1,10 +1,10 @@
 import './App.css'
-
+import Truthy from './Truthy';
 function App() {
-  const isLoggedIn= true;
+  const isLoggedIn= false;
   return (
     <>
-  <h1>{isLoggedIn?"accessable":"not permitted"}</h1>
+  {isLoggedIn && <Truthy/>}
       </>
   )
 }
