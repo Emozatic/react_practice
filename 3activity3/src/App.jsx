@@ -1,11 +1,12 @@
 import './App.css'
 import Admin from './Admin'
+import User from './User';
 
 function App() {
-const isAdmin= true;
+const isAdmin= false;
   return (
     <>
-      {isAdmin && <Admin/>}
+      {isAdmin ?<Admin/>:<User/>}
           </>
   )
 }
