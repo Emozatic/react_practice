@@ -3,13 +3,16 @@ import Product from './Product';
 
 function App() {
   
-let buttonClicked=()=>{
-  console.log("Purchased");
+let buttonClicked=(brand)=>{
+  console.log(`${brand} Purchased`);
 }
   return (
     <>
-  <Product name="Iphone" price={100000} inStock={true}/>
-  <button onClick={buttonClicked}>Buy Now</button>
+  <Product name="Iphone" price={100000} inStock={true} clicked={buttonClicked}/>
+  <Product name="samsung" price={20000} inStock={false} clicked={buttonClicked}/>
+  <Product name="google" price={50000} inStock={true} clicked={buttonClicked}/>
+
+  
      </>
   )
 }
