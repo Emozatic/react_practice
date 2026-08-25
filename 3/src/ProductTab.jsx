@@ -1,8 +1,8 @@
 import Product from "./Product"
-function ProductTab ({name,brand,price}){
+function ProductTab ({name,brand,price,inStock}){
     return(
         <>
-        <Product name={name} brand={brand} price={price}/>
+        <Product name={name} brand={brand} price={price} inStock={inStock}/>
         </>
     )
 }
