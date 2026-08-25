@@ -1,14 +1,13 @@
 import { useState } from 'react'
 import './App.css'
 import ProductTab from './ProductTab'
+import ProductCard from './ProductCard';
 
 function App() {
-let arr1= ["hi-tech", "durable"];
-let arr2= ["massive-battery", "cost-effecient"];
-  return (
-    <>
-    <ProductTab title="iphone" price="80k" features={arr1}/>
-    <ProductTab title="android" price="20k" features={arr2}/>
+  let arr1= ["hi-tech", "durability"];
+  return(
+  <>
+  <ProductCard title="Iphone" price={100000} features={arr1}/>
           </>
   )
 }
