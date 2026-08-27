@@ -14,15 +14,24 @@ function App() {
     ))
   }
 
+  function specific(idx){
+    setCount((items)=>(
+      items.filter((item,i)=>(
+        i!==idx
+      ))
+    ))
+  }
   return (
     <>
   <h1>{count[0]}</h1>
   <h2>{count[1]}</h2>
   <button onClick={add}>Add</button>
   <button onClick={filteratin}>Del</button>
-  <ul>{count.map((item)=>(
-    <li>{item}</li>
-  ))}</ul>
+  <ul>{count.map((item, idx)=>(
+    <li key={idx}>{item}
+    <button onClick={()=>specific(idx)}>delete</button>
+    </li>
+    ))}</ul>
   
      </>
   )
