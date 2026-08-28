@@ -9,15 +9,24 @@ function App() {
       ...previous, "Node"
     ]))
   }
+  function remove(key){
+    setCount((items)=>(
+      items.filter((item,i)=>(
+        i !== key
+      ))
+    ))
+  }
 
 
   return (
     <>
       <ul>{count.map((data, idx)=>(
         <li key={idx}>{data}
+        <button onClick={()=>{remove(idx)}}>Remove</button>
         </li>
       ))}</ul>
       <button onClick={adding}>Add</button>
+
           </>
   )
 }
