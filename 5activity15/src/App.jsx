@@ -34,6 +34,13 @@ function App() {
       ...prevSkills.slice(0,-1)
       ]))
   }
+  function upperCase(){
+    setSkills((prevSkills)=>( 
+      prevSkills.map((skills)=>(
+      skills.toUpperCase()
+      ))
+    ))
+  }
 
   return (
     <>
@@ -45,6 +52,7 @@ function App() {
     <button onClick={addMultiple}>Add Multiple</button>
     <button onClick={removeBeginning}>Remove Beginning</button> 
     <button onClick={removeLast}>Remove Last</button>
+    <button onClick={upperCase}>Upper case</button>
       </>
 
   )
