@@ -29,6 +29,11 @@ function App() {
       ))
     ))
   }
+  function removeLast(){
+    setSkills((prevSkills)=>([
+      ...prevSkills.slice(0,-1)
+      ]))
+  }
 
   return (
     <>
@@ -39,6 +44,7 @@ function App() {
     <button onClick={delNode}>Del</button>
     <button onClick={addMultiple}>Add Multiple</button>
     <button onClick={removeBeginning}>Remove Beginning</button> 
+    <button onClick={removeLast}>Remove Last</button>
       </>
 
   )
