@@ -6,7 +6,7 @@ function App() {
     name:"",
     age:"",
     email:"",
-    terms:true
+    gender:""
   })
   function editing(e){
     setForm((prev)=>{
@@ -23,7 +23,7 @@ function App() {
       name:"",
       age:"",
       email:"",
-      terms:false
+      gender:""
     })
   }
 
@@ -33,7 +33,10 @@ function App() {
     <input type="text" placeholder='enter name' name='name' value={form.name} onChange={editing}/>
     <input type="text" placeholder='enter age' name='age' value={form.age} onChange={editing}/>
     <input type="text" placeholder='enter email' name='email' value={form.email} onChange={editing}/>
-    <input type="checkbox" name='terms' value={form.terms} onChange={editing}/>
+    <label htmlFor="gender">male</label>
+    <input type="radio" name='gender' onChange={editing} value="male"/>
+    <label htmlFor="gender">Female</label>
+    <input type="radio" name='gender' onChange={editing} value="female"/>
     <button type='submit'>submit</button>
   </form>
 
