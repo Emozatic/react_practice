@@ -20,6 +20,13 @@ function App() {
       ))
     ))
   }
+  function update(id){
+    setUser((prevuser)=>(
+      prevuser.map((banda)=>(
+        banda.id == id ? {...banda, age: banda.age+1} : banda
+      ))
+    ))
+  }
 
   return (
     <>
@@ -28,6 +35,7 @@ function App() {
       <li>{banda.name} - {banda.age} 
 
       <button onClick={()=>{del(banda.id)}}>del</button>
+      <button onClick={()=>{update(banda.id)}}>Update</button>
 
       </li>
       </div>
