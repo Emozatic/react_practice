@@ -6,11 +6,13 @@ function App() {
   function inputBox(e){
     setName(e.target.value);
   }
+  
 
 
   return (
     <>
     <input type="text" placeholder='enter anything' onChange={inputBox} value={name}/>
+    <h1>Hello {name}</h1>
       </>
   )
 }
