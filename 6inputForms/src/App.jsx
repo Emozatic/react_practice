@@ -10,13 +10,21 @@ function App() {
   function setage(e){
     setAge(e.target.value)
   }
+  function handlesubmit(e){
+    e.preventDefault();
+    setName("")
+    console.log(name)
+  }
   
 
 
   return (
     <>
-    <input type="text" placeholder='enter anything' onChange={inputBox} value={name}/>
+    <form onSubmit={handlesubmit}>
+      <input type="text" placeholder='enter anything' onChange={inputBox} value={name}/>
     <input type="text" placeholder='enter age'  onChange={setage} value={age}/>
+    <button type='submit'>Submit</button>
+    </form>
     <h1>Hello {name}, your age is= {age}</h1>
       </>
   )
