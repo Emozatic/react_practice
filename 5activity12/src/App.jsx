@@ -9,9 +9,8 @@ function App() {
   })
   function update(){
     setUser((prevUser)=>({
-      name:"Rahul",
-      age:22,
-      city:"Delhi"
+      ...prevUser, age:22
+      
     }))
   }
 
