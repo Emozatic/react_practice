@@ -6,7 +6,7 @@ function App() {
 
   function add(){
     setSkills((prevSkills)=>([
-      "Js", ...prevSkills
+     prevSkills[0], "Js", ...prevSkills.slice(1)
     ]))
   }
 
