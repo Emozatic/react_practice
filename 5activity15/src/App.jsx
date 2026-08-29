@@ -17,6 +17,12 @@ function App() {
     ))
   }
 
+  function addMultiple(){
+    setSkills((prevSkills)=>([
+     ...prevSkills, "Mongo", "Express"
+    ]))
+  }
+
   return (
     <>
     {skills.map((skill)=>(
@@ -24,7 +30,9 @@ function App() {
     ))}
     <button onClick={add}>Add</button>
     <button onClick={delNode}>Del</button>
+    <button onClick={addMultiple}>Add Multiple</button>
       </>
+
   )
 }
 
