@@ -7,6 +7,12 @@ function App() {
     {id:2, name:"Rocky", age:19}
   ])
 
+  function add(){
+    setUser((prevuser)=>([
+      ...prevuser, {id:3, name:"Aman", age:20}
+    ]))
+  }
+
   return (
     <>
     <ul>{user.map((banda)=>(
@@ -15,6 +21,7 @@ function App() {
       </div>
        
     ))}</ul>
+    <button onClick={add}>Add</button>
     </>
   )
 }
