@@ -9,11 +9,18 @@ function App() {
       ...prev, "Node"
     ]))
   }
+  function del(key){
+    setSkills((prev)=>
+      prev.filter((skills, id)=>{
+        return id !== key
+      })
+    )
+  }
   return (
     <>
       <ul>{skills.map((items, idx)=>{
        return <li key={idx}>{items}
-
+        <button onClick={()=>{del(idx)}}>Del</button>
         </li>
       })}</ul>
       <button onClick={adding}>Add</button>
