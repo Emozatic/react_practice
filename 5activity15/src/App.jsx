@@ -22,6 +22,13 @@ function App() {
      ...prevSkills, "Mongo", "Express"
     ]))
   }
+  function removeBeginning(){
+    setSkills((prevSkills)=>(
+      prevSkills.filter((items, idx)=>(
+        idx !==  0
+      ))
+    ))
+  }
 
   return (
     <>
@@ -31,6 +38,7 @@ function App() {
     <button onClick={add}>Add</button>
     <button onClick={delNode}>Del</button>
     <button onClick={addMultiple}>Add Multiple</button>
+    <button onClick={removeBeginning}>Remove Beginning</button> 
       </>
 
   )
