@@ -12,12 +12,24 @@ function App() {
       ...prevuser, {id:3, name:"Aman", age:20}
     ]))
   }
+  
+  function del(id){
+    setUser((prevuser)=>(
+      prevuser.filter((items, i)=>(
+       items.id !== id
+      ))
+    ))
+  }
 
   return (
     <>
     <ul>{user.map((banda)=>(
       <div key={banda.id}>
-      <li>{banda.name} - {banda.age}</li>
+      <li>{banda.name} - {banda.age} 
+
+      <button onClick={()=>{del(banda.id)}}>del</button>
+
+      </li>
       </div>
        
     ))}</ul>
