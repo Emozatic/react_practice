@@ -3,17 +3,19 @@ import {useEffect} from 'react'
 import './App.css'
 
 function App() {
+  const[count, setCount]= useState(0);
   useEffect(()=>{
     console.log("Hello, World!");
-  })
-  function app(){
-    con
+},[]);
+  function inc(){
+    setCount(count+1);
   }
 
   return (
     <>
-    <h2>{app}</h2>
-    <h1>Hello</h1>
+    
+    <h1>{count}</h1>
+    <button onClick={inc}>Inc</button>
       </>
   )
 }
