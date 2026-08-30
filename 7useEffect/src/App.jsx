@@ -5,6 +5,7 @@ import './App.css'
 function App() {
   const[count, setCount]= useState(0);
   const[user, setUser]= useState([])
+  const[loading, setLoading]= useState(true);
 //   useEffect(()=>{
 //     console.log("Hello, World!");
 // },[count]);
@@ -15,6 +16,7 @@ useEffect(()=>{
   .then((data)=>{
     console.log(data);
     setUser(data);
+    setLoading(false)
   })
 },[])
   function inc(){
@@ -23,10 +25,17 @@ useEffect(()=>{
 
   return (
     <>
-    
+    {loading ? (<h1>Loading...</h1>) : 
     <ul>{user.map((data)=>(
-      <li key={data.id}>{data.name}</li>
+      <div key={data.id}>
+      <li>{data.name}</li>
+       <li>{data.email}</li>
+        <li>{data.phone}</li>
+        <li>{data.address.city}</li>
+        <hr />
+      </div>
     ))}</ul>
+  }
       </>
   )
 }
