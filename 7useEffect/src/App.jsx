@@ -4,7 +4,7 @@ import './App.css'
 
 function App() {
   const[count, setCount]= useState(0);
-  
+  const[user, setUser]= useState([])
 //   useEffect(()=>{
 //     console.log("Hello, World!");
 // },[count]);
@@ -14,6 +14,7 @@ useEffect(()=>{
   .then((res)=>res.json())
   .then((data)=>{
     console.log(data);
+    setUser(data);
   })
 },[])
   function inc(){
@@ -23,8 +24,9 @@ useEffect(()=>{
   return (
     <>
     
-    <h1>{count}</h1>
-    <button onClick={inc}>Inc</button>
+    <ul>{user.map((data)=>(
+      <li key={data.id}>{data.name}</li>
+    ))}</ul>
       </>
   )
 }
