@@ -8,7 +8,8 @@ function App() {
     email:"",
     terms:false,
     gender:"",
-    country:""
+    country:"",
+    message:""
   })
 
   function setting(e){
@@ -21,6 +22,7 @@ function App() {
 
   return (
     <>
+    <input type="textarea" value={form.message} onChange={setting} placeholder='enter your message' name='message'/>
     <select name="country" value={form.country} onChange={setting}>
       <option value="">Select Country</option>
       <option value="India">India</option>
@@ -28,6 +30,8 @@ function App() {
       <option value="Japan">JAPAn</option>
     </select>
     <h3>{form.country}</h3>
+    <h4>{form.message}</h4>
+    
           </>
   )
 }
