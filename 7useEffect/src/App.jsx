@@ -4,9 +4,18 @@ import './App.css'
 
 function App() {
   const[count, setCount]= useState(0);
-  useEffect(()=>{
-    console.log("Hello, World!");
-},[count]);
+  
+//   useEffect(()=>{
+//     console.log("Hello, World!");
+// },[count]);
+
+useEffect(()=>{
+  fetch("https://jsonplaceholder.typicode.com/users")
+  .then((res)=>res.json())
+  .then((data)=>{
+    console.log(data);
+  })
+},[])
   function inc(){
     setCount(count+1);
   }
