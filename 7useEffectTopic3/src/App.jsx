@@ -12,6 +12,7 @@ function App() {
     // cleanup function
     return()=>{
       clearInterval(timer);
+      console.log("cleanup")
     }
   },[show])
   function toggler(){
