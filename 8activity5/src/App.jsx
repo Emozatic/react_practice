@@ -5,11 +5,12 @@ import User from './User'
 
 function App() {
   const [count, setCount] = useState(0)
-  let obj= {name:"Lucky", age:21, city:"Delhi"}
+  let obj= {name:"Lucky", age:21, city:"Delhi"};
+  const[data, setData]= useState(obj);
 
   return (
     <>
-  <ContextProvider.Provider value={obj}><User/></ContextProvider.Provider>
+ <ContextProvider.Provider value={{data,setData}}><User/></ContextProvider.Provider>
         </>
   )
 }
