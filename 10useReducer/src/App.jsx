@@ -4,11 +4,21 @@ import './App.css'
 let initialState=0;
 
   function reducer(state,action){
-    if(action.type==="increase"){
-      return state+1;
+    // if(action.type==="increase"){
+    //   return state+ action.payload;
+    // }
+    // if(action.type==="decrease"){
+    //   return state-action.payload;
+    // }
+    if(action.type==="changeName"){
+      return {
+        ...state, name:action.payload
+      }
     }
-    if(action.type==="decrease"){
-      return state-1;
+    if(action.type==="increase"){
+      return{
+        ...state, age:action.payload+state.age
+      }
     }
     return state;
   }
@@ -16,13 +26,20 @@ let initialState=0;
 
 
 function App() {
+  const initial= {
+    name:"Rahul",
+    age: 21
+  }
   
-  const[state, dispatch]= useReducer(reducer, initialState)
+  const[state, dispatch]= useReducer(reducer, {name:"Rahul", age:21})
   return (
     <>
-    <h1>{state}</h1>
-      <button onClick={()=>{dispatch({type:"increase"})}}>Inc</button>
-      <button onClick={()=>{dispatch({type:"decrease"})}}>dec</button>
+  
+    <h2>{state.name}</h2>
+    <h2>{state.age}</h2>
+      <button onClick={()=>{dispatch({type:"increase",payload:1})}}>IncAgex</button>
+      
+      <button onClick={()=>{dispatch({type:"changeName", payload:"Lucky"})}}>ChangeName</button>
           </>
   )
 }
