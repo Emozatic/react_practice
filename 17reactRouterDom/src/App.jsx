@@ -1,16 +1,31 @@
 import { useState } from 'react'
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {BrowserRouter, Routes, Route, NavLink, useNavigate} from "react-router-dom";
+import {Link} from 'react-router-dom'
+import Home from './Home';
+import About from './About';
+import Contact from './Contact';
+import User from './User';
+
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
     <>
+    
     <BrowserRouter>
+    <NavLink to="/">Home</NavLink>
+    <NavLink to="/about">About</NavLink>
+    <NavLink to="/contact">Contact</NavLink>
+    <NavLink to="/user">User</NavLink>
     <Routes>
-      <Route path='/' element={<h1>Home Route</h1>}/>
-      <Route path='/about' element={<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus veritatis nemo dolorum, facilis perspiciatis ex porro, animi ipsa ducimus facere reprehenderit nulla impedit sit distinctio? Ipsum omnis voluptatibus dolor rem!</p>}/>
+      <>
+    <Route path='/' element={<Home/>}/>
+    <Route path='/about' element={<About/>}/>
+    <Route path='/contact' element={<Contact/>}/>
+    <Route path='/user/:id' element={<User/>}/>
+    </>
     </Routes>
     </BrowserRouter>
       
