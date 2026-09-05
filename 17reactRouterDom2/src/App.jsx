@@ -7,6 +7,7 @@ import './App.css'
 import Dashboard from './Dashboard'
 import Setting from './Setting'
 import Profile from './Profile'
+import Error from "./Error"
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
       <Route path='setting' element={<Setting/>}/>
       </Route>
       </Route>
+      <Route path='*' element={<Error/>}/>
 
     </Routes> 
     </BrowserRouter>
