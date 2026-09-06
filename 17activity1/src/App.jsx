@@ -11,6 +11,7 @@ import Navbar from './components/Navbar';
 import ProductDetails from './pages/ProductDetails';
 import ProtectedRoute from './pages/ProtectedRoute';
 import Login from './pages/Login';
+import Logout from './pages/logout';
 function App() {
   const [count, setCount] = useState(0)
   const [isloggedIn, setLoggedIn]= useState(false)
@@ -30,9 +31,11 @@ function App() {
 
       <Route path='/cart' element={<Cart/>}/>
 
-      <Route path='/dashboard' element={<ProtectedRoute isLoggedIn={isloggedIn}><Dashboard/></ProtectedRoute>}/>
+      <Route path='/dashboard' element={<ProtectedRoute isLoggedIn={isloggedIn}><Dashboard setLoggedIn={setLoggedIn}/></ProtectedRoute>}/>
 
       <Route path='/login' element={<Login setLoggedIn= {setLoggedIn}/>}/>
+
+      <Route path='/logout' element={<Logout/>}/>
       
       <Route path='*' element={<NotFound/>}/>
 
