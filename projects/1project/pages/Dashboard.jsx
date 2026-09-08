@@ -1,8 +1,18 @@
 //Dashboard.jsx
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 function Dashboard(){
+    const {setIsLoggedIn}= useContext(AuthContext)
+    const navigate= useNavigate();
+    function logoutSetting(){
+        setIsLoggedIn(false);
+        navigate("/login")
+    }
     return(
         <>
         <h1>Welcome to DashBoard</h1>
+        <button onClick={logoutSetting}>Logout</button>
         </>
     )
 }
