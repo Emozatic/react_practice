@@ -8,6 +8,8 @@ function Login(){
     const navigate= useNavigate();
     function setting(){
         setIsLoggedIn(true)
+        localStorage.removeItem("status")
+        localStorage.setItem("status", true)
         navigate("/dashboard")
     }
 

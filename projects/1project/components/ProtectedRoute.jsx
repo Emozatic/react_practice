@@ -11,7 +11,8 @@ function ProtectedRoute({children}){
         navigate("/login")
     }
     function check(){
-        if(isLoggedIn===true){
+        let data= localStorage.getItem("status")
+        if(data==="true"){
             return children;
         }
         else{
