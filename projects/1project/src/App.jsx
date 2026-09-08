@@ -12,11 +12,12 @@ import Home from '../pages/Home';
 function App() {
   const [count, setCount] = useState(0)
   const [isLoggedIn, setIsLoggedIn]= useState(false);
+  const [user, setUser]= useState("Guest")
 
   return (
     <>
       <BrowserRouter>
-      <AuthContext.Provider value={{isLoggedIn, setIsLoggedIn}}>
+      <AuthContext.Provider value={{isLoggedIn, setIsLoggedIn, user, setUser}}>
     <Routes>
       <Route path='/' element={<Home/>}/>
     <Route path='/Login' element={<Login/>}/>

@@ -3,15 +3,19 @@ import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 function Login(){
-    let {isLoggedIn, setIsLoggedIn}= useContext(AuthContext);
+    let {isLoggedIn, setIsLoggedIn, user, setUser}= useContext(AuthContext);
     console.log(`login, ${isLoggedIn}`)
     const navigate= useNavigate();
     function setting(){
+        setUser("Lucky")
         setIsLoggedIn(true)
+        
+        console.log(`user in Loginn ${user}`)
         localStorage.removeItem("status")
         localStorage.setItem("status", true)
         navigate("/dashboard")
     }
+
 
     return(
         <>
