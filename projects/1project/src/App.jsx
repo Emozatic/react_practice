@@ -8,6 +8,8 @@ import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
 import ProtectedRoute from '../components/ProtectedRoute';
 import Home from '../pages/Home';
+import ProductDetails from '../pages/ProductDetails';
+import Products from '../pages/Products';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -27,6 +29,7 @@ function App() {
         </ProtectedRoute>
         }
         />
+        <Route path='/products' element={<Products/>}/>
     </Routes>
     </AuthContext.Provider>
       </BrowserRouter>
