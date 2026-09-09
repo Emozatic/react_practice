@@ -11,6 +11,7 @@ import Home from '../pages/Home';
 import ProductDetails from '../pages/ProductDetails';
 import Products from '../pages/Products';
 
+
 function App() {
   const [count, setCount] = useState(0)
   const [isLoggedIn, setIsLoggedIn]= useState(false);
@@ -30,6 +31,7 @@ function App() {
         }
         />
         <Route path='/products' element={<Products/>}/>
+        <Route path='/products/:id' element={<ProductDetails/>}/>
     </Routes>
     </AuthContext.Provider>
       </BrowserRouter>
