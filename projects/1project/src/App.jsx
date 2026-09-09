@@ -10,6 +10,7 @@ import ProtectedRoute from '../components/ProtectedRoute';
 import Home from '../pages/Home';
 import ProductDetails from '../pages/ProductDetails';
 import Products from '../pages/Products';
+import ProductProvider from '../context/CartContext';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
     <>
       <BrowserRouter>
       <AuthContext.Provider value={{isLoggedIn, setIsLoggedIn, user, setUser}}>
+        <ProductProvider>
     <Routes>
       <Route path='/' element={<Home/>}/>
     <Route path='/Login' element={<Login/>}/>
@@ -32,7 +34,9 @@ function App() {
         />
         <Route path='/products' element={<Products/>}/>
         <Route path='/products/:id' element={<ProductDetails/>}/>
+        <Route path='/cart' element={<Cart/>}/>
     </Routes>
+    </ProductProvider>
     </AuthContext.Provider>
       </BrowserRouter>
     </>
