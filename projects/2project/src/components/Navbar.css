@@ -1,0 +1,29 @@
+nav {
+  background-color: #1f2937;
+  padding: 16px 32px;
+}
+
+nav ul {
+  display: flex;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+nav a:hover {
+  color: #facc15;
+}
+
+nav a.active {
+  color: #facc15;
+  font-weight: bold;
+  border-bottom: 2px solid #facc15;
+  padding-bottom: 4px;
+}

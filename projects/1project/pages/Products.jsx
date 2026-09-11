@@ -1,7 +1,9 @@
-import ProductDetails from "./ProductDetails";
+import { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 function Products(){
-    let products= [{id:1, name:"Iphone", price:50000}, {id:2, name:"Laptop", price:100000}, {id:3, name:"Mouse", price:1000}];
+    let {products}= useContext(CartContext)
+    console.log(products)
     const navigate= useNavigate();
         
     
@@ -11,7 +13,8 @@ function Products(){
             return(
             <>
             <div key={item.id}> 
-                <ProductDetails name={item.name} price={item.price} id={item.id} />
+                <h1>{item.name}</h1>
+                <h2>{item.price}</h2>
             <button onClick = {()=>navigate(`/products/${item.id}`)}>view:- {item.name}</button>
             </div>
             </>

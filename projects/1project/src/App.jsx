@@ -11,6 +11,7 @@ import Home from '../pages/Home';
 import ProductDetails from '../pages/ProductDetails';
 import Products from '../pages/Products';
 import ProductProvider from '../context/CartContext';
+import Cart from '../pages/Cart';
 
 
 function App() {

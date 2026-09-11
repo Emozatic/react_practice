@@ -5,13 +5,14 @@ import { useNavigate } from "react-router-dom";
 function Dashboard(){
     const {isLoggedIn, setIsLoggedIn, user, setUser}= useContext(AuthContext)
     const navigate= useNavigate();
+
     function logoutSetting(){
         localStorage.removeItem("status")
-        
         setIsLoggedIn(false);
         localStorage.setItem("status",false)
         navigate("/login")
     }
+    
     return(
         <>
         <h1>Welcome to DashBoard</h1>

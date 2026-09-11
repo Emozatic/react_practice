@@ -1,0 +1,28 @@
+export const products= [{
+    id:1,
+    title:"Laptop",
+    price:20000,
+    category:"electronics",
+    image:"https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRoW_qrHg4jlM2EmJvyoFL0oL6DaxBsd7Xc4E4XCAEOJlLxf2_g-1D_O44lRwSmgz7d-NAbuxTREqLqkvZHk9bWM87ehMMViqRd94bQTEOJ_NfXNuJKdBVSfg",
+},
+    {
+        id:2,
+    title:"Mobile",
+    price:1000,
+    category:"electronics",
+    image:"https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcToY9v9rtSC7M9TI_sMkI579pfMyXzmgpgqinW2zBRQ2ant4M4jBzrP6raZUJWFxo9abJja_fB7xARJq1iLY9eBu7JbvWTkpZVw58MJtK1zhhPgaPfT9YrIWA",
+    },
+{
+    id:3,
+    title:"clothes",
+    price:500,
+    category:"wearings",
+    image:"https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSr3wbOJKDutAhYWCT174ucgZWSiikIbysxMhDJv9fEafsn1tNTYNkrj4K-pj7RkUdBkwmhN5X1D6dIm2n9Yg7j2E-nu9zT-jnzCqXk-6pp09vC2NST4BAH"
+},
+{
+    id:4,
+    title:"Pen",
+    price:500,
+    category:"stationary",
+    image:"https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQZFHBzeFG1zQJs6WpU69uBpUtvpB2tiayD44YoGVXQSyZyZWhI2xhGDbFRU_JwWI4XBzubtH0RWqNuX-bXvUbqGjaoZBAAkoaHfYxlY-5mgyTQG52NRTYp6w"
+}]
