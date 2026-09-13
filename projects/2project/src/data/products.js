@@ -8,7 +8,7 @@ export const products= [{
     {
         id:2,
     title:"Mobile",
-    price:1000,
+    price:100000,
     category:"electronics",
     image:"https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcToY9v9rtSC7M9TI_sMkI579pfMyXzmgpgqinW2zBRQ2ant4M4jBzrP6raZUJWFxo9abJja_fB7xARJq1iLY9eBu7JbvWTkpZVw58MJtK1zhhPgaPfT9YrIWA",
     },
