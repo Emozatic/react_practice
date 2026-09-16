@@ -7,6 +7,7 @@ function Products(){
         <h1>Products page</h1>
         {products.map((item)=>(
             <Product 
+            image={item.image}
             id= {item.id}
             name={item.name}
             price={item.price}
