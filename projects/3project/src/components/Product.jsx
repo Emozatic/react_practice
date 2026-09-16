@@ -1,12 +1,20 @@
-function Product({id, name, price, category, handleProductClick}){
-    
+import { use } from "react";
+import { useNavigate } from "react-router-dom";
+function Product({name, id, price, category}){
+    const navigate= useNavigate();
+    function viewDetails(id){
+        navigate(`/product/${id}`)
+    }
+        
     return(
         <>
-            <h1>ID:- {id}</h1>
-            <h1>Name:- {name}</h1>
-            <h2>Price:- {price}</h2>
-            <h2>Category:- {category}</h2>
-            <button onClick={()=>{handleProductClick({id, name, price, category})}}>View {name}</button>
+            <div key={id}>
+                <h1>ID:- {id}</h1>
+                <h1>{name}</h1>
+                <h2>{price}</h2>
+                <h2>{category}</h2>
+                <button onClick={()=>{viewDetails(id)}}>View {name}</button>
+            </div>
         </>
     )
 }
