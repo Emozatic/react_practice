@@ -5,7 +5,6 @@ function Cart(){
     const {cart, setCart}= useContext(CartContext);
 
     function removeFromCart(product){
-        
         setCart(cart.filter((item)=>item.id !== product.id ))
     }
 
@@ -26,6 +25,8 @@ function Cart(){
         function clearCart(){
             setCart([])
         }
+
+        
 
     
     return(
