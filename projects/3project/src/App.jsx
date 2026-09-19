@@ -5,12 +5,13 @@ import Home from './pages/Home';
 import ProductDetails from './pages/ProductDetails';
 import Products from './pages/Products';
 import Cart from './pages/Cart';
+import Navbar from './components/Navbar';
 
 function App(){
 
   return (
     <>
-     <h1>My E-commerce Website</h1>
+     <Navbar/>
 
     <Routes>
     <Route path='/' element={<Home/>}/>
