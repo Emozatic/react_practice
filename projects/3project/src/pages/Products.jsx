@@ -1,16 +1,22 @@
 import Product from "../components/Product";
-import products from "../data/products";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 function Products(){
     const [search, setSearch] = useState("")
     const [category, setCategory]= useState("All");
     const [sort, setSort]= useState("default");
+    const [apiProducts, setApiProducts]= useState([]);
+
+    useEffect(()=>{
+        fetch("http://localhost:8000/api/products")
+        .then((res)=>res.json())
+        .then((data)=>{setApiProducts(data)})
+    },[])
 
     function searching(e){
         setSearch (e.target.value);
     }
 
-    const filteredProducts= products.filter((item)=> (item.name.toLowerCase().includes(search.toLowerCase()) || item.category.toLowerCase().includes(search.toLowerCase()))&& (category==="All" || item.category === category));
+    const filteredProducts= apiProducts.filter((item)=> (item.name.toLowerCase().includes(search.toLowerCase()) || item.category.toLowerCase().includes(search.toLowerCase()))&& (category==="All" || item.category === category));
 
     const sortedProducts= [...filteredProducts].sort((a,b)=>{if(sort === "low"){return a.price-b.price}
     if(sort==="high"){return b.price-a.price}
@@ -28,6 +34,7 @@ function Products(){
     return(
         <>
         <h1>Products page</h1>
+
         <select name="" id="" value={category} onChange={filteration}>
             <option value="All">All</option>
             <option value="Mobile">Mobile</option>

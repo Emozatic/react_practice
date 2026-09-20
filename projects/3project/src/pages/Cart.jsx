@@ -33,7 +33,7 @@ function Cart(){
     return(
         <>
         <h1>Cart</h1>
-        {cart.length > 0 && ( <div><h2>Total: Rs.{total}</h2> <button onClick={clearCart}>Clear Cart</button> <Link to="/checkout">Proceed to Checkout</Link></div> )}
+        {cart.length === 0 && <><h1>Your Cart is Empty</h1> <Link to="/products">Start Shopping</Link></>}
         {cart.map((item)=>(
             <div key={item.id}>
             <img src={item.image} alt={item.name} />
@@ -42,12 +42,12 @@ function Cart(){
             <h3>Category:- {item.category}</h3>
             <h3>Quantity:- <button onClick={()=>{incQuantity(item)}}>+</button>{item.quantity}<button onClick={()=>{decQuantity(item)}}>-</button></h3>
             <button onClick={()=>{removeFromCart(item)}}>Remove</button>
-
-            
+            <button onClick={clearCart}>Clear</button>
+            <h4>Total:- {total}</h4>
+        <Link to="/checkout">Checkout</Link>    
             </div>
         ))}
-        <h2>Your Cart is Empty</h2>
-        <Link to="/products">Back to Shopping</Link>
+        
         </>
     )
 }
