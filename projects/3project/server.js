@@ -4,7 +4,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 const app= express();
-import Product from "./models/Product.js"
+import Product from "./models/Product.js";
 app.use(cors());
 
 
