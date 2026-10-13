@@ -26,6 +26,9 @@ function App() {
     function removingTask(index){
       setTasks((prev)=>prev.filter((task,idx)=>task.id !== index))
     }
+    function toggletask(id){
+      setTasks((prev)=>prev.map((task)=>task.id===id ? {...task, completed:!task.completed}: task))
+    }
     
 
   return (
@@ -40,8 +43,17 @@ function App() {
     <div>
       <h3>Your Tasks:-</h3>
       <ul>{tasks.map((task)=>(
-        <li key={task.id}>{task.title}
-        <button onClick={()=>removingTask(task.id)}>Remove</button></li>
+        <li key={task.id}>
+
+          <span style={{textDecoration : task.completed ? "line-through" : "none"}}>{task.title}</span>
+        <p>Status: {task.completed ? "completed" : "not Completed"}</p>
+
+        <button onClick={()=>removingTask(task.id)}>Remove</button>
+        
+        <button onClick={()=>toggletask(task.id)}>Mark Complete</button>
+        </li>
+
+        
       ))}</ul>
     </div>
   </div>
