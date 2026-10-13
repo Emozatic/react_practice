@@ -3,7 +3,9 @@ import { useState } from 'react'
 
 function App() {
     const [tasks, setTasks]= useState([]);
-    const [input , setInput]= useState("")
+    const [input , setInput]= useState("");
+    const [filter, setFilter]= useState("all");
+
     function addingName(){
       setName("Rahul")
     }
@@ -30,8 +32,21 @@ function App() {
       setTasks((prev)=>prev.map((task)=>task.id===id ? {...task, completed:!task.completed}: task))
     }
     
+    const filteredTasks= tasks.filter((task)=>{
+      if(filter === "pending"){
+        return task.completed === false;
+      }
+      if(filter === "completed"){
+        return task.completed === true;
+      }
+      return true;
+    })
+    const completedCount = tasks.filter((task)=> task.completed === true).length;
+    const totalCount = tasks.length;
+    const pendingCount = tasks.length - completedCount;
 
   return (
+    
     <>
   <div>
     <h1>Task Manager</h1>
@@ -42,7 +57,7 @@ function App() {
 
     <div>
       <h3>Your Tasks:-</h3>
-      <ul>{tasks.map((task)=>(
+      <ul>{filteredTasks.map((task)=>(
         <li key={task.id}>
 
           <span style={{textDecoration : task.completed ? "line-through" : "none"}}>{task.title}</span>
@@ -51,11 +66,22 @@ function App() {
         <button onClick={()=>removingTask(task.id)}>Remove</button>
         
         <button onClick={()=>toggletask(task.id)}>Mark Complete</button>
+
         </li>
 
         
       ))}</ul>
     </div>
+    
+        <button onClick={()=>setFilter("all")}>All</button>
+
+        <button onClick={()=>setFilter("pending")}>Pending</button>
+
+        <button onClick={()=>setFilter("completed")}>Completed</button>
+
+        <p>All Tasks :- {totalCount}</p>
+        <p>Completed Tasks : - {completedCount}</p>
+        <p>Pending Tasks :- {pendingCount}</p>
   </div>
     </>
   )
