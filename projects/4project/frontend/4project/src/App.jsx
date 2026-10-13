@@ -16,11 +16,15 @@ function App() {
         return
       }
       setTasks((prev)=>([
-        ...prev, input
+        ...prev,{
+          id:Date.now(),
+          title:input,
+          completed:false
+        }
       ]))
     }
     function removingTask(index){
-      setTasks((prev)=>prev.filter((task,idx)=>idx !== index))
+      setTasks((prev)=>prev.filter((task,idx)=>task.id !== index))
     }
     
 
@@ -35,9 +39,9 @@ function App() {
 
     <div>
       <h3>Your Tasks:-</h3>
-      <ul>{tasks.map((task,idx)=>(
-        <li key={idx}>{task}
-        <button onClick={()=>removingTask(idx)}>Remove</button></li>
+      <ul>{tasks.map((task)=>(
+        <li key={task.id}>{task.title}
+        <button onClick={()=>removingTask(task.id)}>Remove</button></li>
       ))}</ul>
     </div>
   </div>
