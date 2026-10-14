@@ -1,8 +1,12 @@
 import './App.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
 
 function App() {
-    const [tasks, setTasks]= useState([]);
+    const [tasks, setTasks]= useState(()=>{
+      const savedTasks= localStorage.getItem("tasks");
+      return savedTasks ? JSON.parse(savedTasks): []
+    });
     const [input , setInput]= useState("");
     const [filter, setFilter]= useState("all");
 
@@ -45,6 +49,11 @@ function App() {
     const totalCount = tasks.length;
     const pendingCount = tasks.length - completedCount;
 
+
+    useEffect(()=>{
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    },[tasks])
+    
   return (
     
     <>
@@ -82,6 +91,12 @@ function App() {
         <p>All Tasks :- {totalCount}</p>
         <p>Completed Tasks : - {completedCount}</p>
         <p>Pending Tasks :- {pendingCount}</p>
+        <button onClick={()=> {
+          const confirmDelete= window.confirm("Are you sure you want to delete all tasks?");
+          if(confirmDelete){
+            setTasks([]);
+          }
+        }}>Clear All</button>
   </div>
     </>
   )
