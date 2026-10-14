@@ -11,6 +11,7 @@ function App() {
     const [filter, setFilter]= useState("all");
     const[editingId, setEditingId]= useState(null);
     const [editTitle, setEditTitle] = useState("");
+    const [search, setSearch]= useState("");
 
     function addingName(){
       setName("Rahul")
@@ -39,13 +40,10 @@ function App() {
     }
     
     const filteredTasks= tasks.filter((task)=>{
-      if(filter === "pending"){
-        return task.completed === false;
-      }
-      if(filter === "completed"){
-        return task.completed === true;
-      }
-      return true;
+     const matchesSearch = task.title.toLowerCase().includes(search.toLowerCase());
+     const matchesFilter= filter === "all" || (filter === "pending" && task.completed ===false) || (filter==="completed" && task.completed === true);
+
+     return matchesSearch && matchesFilter;
     })
     const completedCount = tasks.filter((task)=> task.completed === true).length;
     const totalCount = tasks.length;
@@ -68,6 +66,8 @@ function App() {
     setEditingId(null);
     setEditTitle("");
     }
+
+
     
   return (
     
@@ -75,6 +75,8 @@ function App() {
   <div>
     <h1>Task Manager</h1>
     <p>Manage your daily tasks</p>
+
+    <div><p>Search</p> <input type="text" placeholder='Search Tasks...' value={search} onChange={(e)=>setSearch(e.target.value)}/></div>
     
     <input type="text" value={input} onChange={(e)=>setInput(e.target.value)} placeholder='enter your task'/>
     <button onClick={addingTask}>Add task</button>
@@ -85,7 +87,7 @@ function App() {
         <li key={task.id}>
 
           {editingId === task.id ? (<><input type="text" value={editTitle} onChange={(e)=>setEditTitle(e.target.value)}/>
-          
+
            <button onClick={()=>saveEdit(task.id)}>Save Changes</button>
 
            <button onClick={()=>{setEditingId(null);
