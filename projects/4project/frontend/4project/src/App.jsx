@@ -9,6 +9,8 @@ function App() {
     });
     const [input , setInput]= useState("");
     const [filter, setFilter]= useState("all");
+    const[editingId, setEditingId]= useState(null);
+    const [editTitle, setEditTitle] = useState("");
 
     function addingName(){
       setName("Rahul")
@@ -53,6 +55,19 @@ function App() {
     useEffect(()=>{
       localStorage.setItem("tasks", JSON.stringify(tasks));
     },[tasks])
+
+    function saveEdit(id){
+      if(editTitle.trim()===""){
+        alert ("Task title cannot be empty");
+        return ;
+      }
+      setTasks((prev)=>
+      prev.map((task)=>
+      task.id === id ? {...task, title:editTitle.trim()}: task
+    ))
+    setEditingId(null);
+    setEditTitle("");
+    }
     
   return (
     
@@ -69,12 +84,22 @@ function App() {
       <ul>{filteredTasks.map((task)=>(
         <li key={task.id}>
 
+          {editingId === task.id ? (<><input type="text" value={editTitle} onChange={(e)=>setEditTitle(e.target.value)}/>
+          
+           <button onClick={()=>saveEdit(task.id)}>Save Changes</button>
+
+           <button onClick={()=>{setEditingId(null);
+             setEditTitle("")}}>Cancel editing</button>
+            </> ) : 
           <span style={{textDecoration : task.completed ? "line-through" : "none"}}>{task.title}</span>
+          }
         <p>Status: {task.completed ? "completed" : "not Completed"}</p>
 
         <button onClick={()=>removingTask(task.id)}>Remove</button>
         
         <button onClick={()=>toggletask(task.id)}>Mark Complete</button>
+
+        <button onClick={()=>{setEditingId(task.id); setEditTitle(task.title)} }>Edit</button>
 
         </li>
 
