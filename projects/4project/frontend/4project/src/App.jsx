@@ -63,8 +63,22 @@ function App() {
   }
 
 
-    function toggletask(id){
-      setTasks((prev)=>prev.map((task)=>task.id===id ? {...task, completed:!task.completed}: task))
+    async function toggletask(id){
+      const task = tasks.find((task)=>task._id === id);
+      if(!task) return;
+      try{
+        const response = await fetch(`http://localhost:8000/api/tasks/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ completed: !task.completed })
+        });
+        if(!response.ok) throw new Error("Task not updated");
+        const data = await response.json();
+        setTasks((prev)=>prev.map((item)=>item._id === id ? data.task : item));
+      }catch(err){
+        console.error("Toggle error", err);
+        alert("Task status not updated");
+      }
     }
     
     const filteredTasks= tasks.filter((task)=>{
@@ -80,23 +94,41 @@ function App() {
 
     useEffect(()=>{
       fetch("http://localhost:8000/api/tasks")
-      .then((res)=>res.json())
-      .then((data)=>setTasks(data))
-      .catch((err)=>console.log(err))
-      localStorage.setItem("tasks", JSON.stringify(tasks));
-    },[tasks])
+        .then((res)=>{
+          if(!res.ok) throw new Error("Tasks not fetched");
+          return res.json();
+        })
+        .then((data)=>setTasks(data))
+        .catch((err)=>console.error("Fetch error", err));
+    },[])
 
-    function saveEdit(id){
+    async function saveEdit(id){
       if(editTitle.trim()===""){
-        alert ("Task title cannot be empty");
-        return ;
+        alert("Task title cannot be empty");;
+        return;
       }
-      setTasks((prev)=>
-      prev.map((task)=>
-      task.id === id ? {...task, title:editTitle.trim()}: task
-    ))
-    setEditingId(null);
-    setEditTitle("");
+      try{
+        const response= await fetch(`http://localhost:8000/api/tasks/${id}`,{
+          method:"PUT",
+          headers:{
+            "Content-Type":"application/json"
+          },
+          body:JSON.stringify({
+            title:editTitle.trim(),
+          })
+        })
+        if(!response.ok){
+          throw new Error ("Task not updated");
+        }
+        const data= await response.json();
+        setTasks((prev)=>prev.map((task)=>task._id===id ? data.task:task));
+
+        setEditingId(null);
+        setEditTitle("");
+      }catch(err){
+        console.error("updated error", err);
+        alert("Task not updated");
+      }
     }
 
 
@@ -116,11 +148,11 @@ function App() {
     <div>
       <h3>Your Tasks:-</h3>
       <ul>{filteredTasks.map((task)=>(
-        <li key={task.id}>
+        <li key={task._id}>
 
-          {editingId === task.id ? (<><input type="text" value={editTitle} onChange={(e)=>setEditTitle(e.target.value)}/>
+          {editingId === task._id ? (<><input type="text" value={editTitle} onChange={(e)=>setEditTitle(e.target.value)}/>
 
-           <button onClick={()=>saveEdit(task.id)}>Save Changes</button>
+           <button onClick={()=>saveEdit(task._id)}>Save Changes</button>   
 
            <button onClick={()=>{setEditingId(null);
              setEditTitle("")}}>Cancel editing</button>
@@ -131,9 +163,9 @@ function App() {
 
         <button onClick={()=>removingTask(task._id)}>Remove</button>
         
-        <button onClick={()=>toggletask(task.id)}>Mark Complete</button>
+        <button onClick={()=>toggletask(task._id)}>{task.completed ? "Mark Pending" : "Mark Complete"}</button>
 
-        <button onClick={()=>{setEditingId(task.id); setEditTitle(task.title)} }>Edit</button>
+        <button onClick={()=>{setEditingId(task._id); setEditTitle(task.title)} }>Edit</button>
 
         </li>
 

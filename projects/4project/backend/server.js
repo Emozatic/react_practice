@@ -61,6 +61,32 @@ app.delete("/api/tasks/:id", async(req,res)=>{
     }
 })
 
+app.put("/api/tasks/:id",async(req,res)=>{
+    try{
+        const updates = {};
+        if (typeof req.body.title === "string") updates.title = req.body.title;
+        if (typeof req.body.completed === "boolean") updates.completed = req.body.completed;
+        const updatedTask= await Task.findByIdAndUpdate(req.params.id, updates,
+    {
+        new:true,
+        runValidators:true
+    });
+    if(!updatedTask){
+        return res.status(404).json({
+            message:"Task not found",
+        })
+    }res.json({
+        message:"Task updated successfully",
+        task:updatedTask
+    })
+    }catch(err){
+        console.log(err);
+        res.status(500).json({
+            message:"Task not updated"
+        })
+    }
+})
+
 mongoose.connect(process.env.MONGO_URL).then(()=>{
     console.log("mongo db connected");
 
