@@ -3,38 +3,66 @@ import { useState, useEffect } from 'react'
 
 
 function App() {
-    const [tasks, setTasks]= useState(()=>{
-      const savedTasks= localStorage.getItem("tasks");
-      return savedTasks ? JSON.parse(savedTasks): []
-    });
+    // const [tasks, setTasks]= useState(()=>{
+    //   const savedTasks= localStorage.getItem("tasks");
+    //   return savedTasks ? JSON.parse(savedTasks): []
+    // });
+    const [tasks, setTasks]= useState([]);
     const [input , setInput]= useState("");
     const [filter, setFilter]= useState("all");
     const[editingId, setEditingId]= useState(null);
     const [editTitle, setEditTitle] = useState("");
     const [search, setSearch]= useState("");
 
-    function addingName(){
-      setName("Rahul")
-    }
-    function incCount(){
-      setCount(count+1);
-    }
-    function addingTask(){
-      if(input===""){
+    async function addingTask(){
+      if(input.trim()===""){
         alert("please enter something in input");
-        return
+        return;
       }
-      setTasks((prev)=>([
-        ...prev,{
-          id:Date.now(),
-          title:input,
-          completed:false
+      try{
+        const response= await fetch("http://localhost:8000/api/tasks", {
+          method: "POST",
+          headers:{
+            "Content-Type":"application/json"
+          },
+          body: JSON.stringify({
+            title:input,
+            completed:false
+          })
+        })
+        if(!response.ok){
+          throw new Error ("failed to add task");
         }
-      ]))
+        const data= await response.json();
+
+        setTasks((prev)=>[...prev, data.task]);
+        setInput("");
+      }
+      catch(error){
+        console.error("Error adding task:", error);
+        alert("Task not added, check backend");
+      }
+      
     }
-    function removingTask(index){
-      setTasks((prev)=>prev.filter((task,idx)=>task.id !== index))
+    
+    async function removingTask(id){
+      try{
+        const response = await fetch(`http://localhost:8000/api/tasks/${id}`,
+          {
+            method:"DELETE",
+          }
+        );
+        if(!response.ok){
+          throw new Error("Task not deleted");
+        }
+        setTasks((prev)=>prev.filter((task)=>task._id !== id));
+      }catch(err){
+        console.log("Deletion Error", err);
+        alert("Task not deleted!")
     }
+  }
+
+
     function toggletask(id){
       setTasks((prev)=>prev.map((task)=>task.id===id ? {...task, completed:!task.completed}: task))
     }
@@ -51,6 +79,10 @@ function App() {
 
 
     useEffect(()=>{
+      fetch("http://localhost:8000/api/tasks")
+      .then((res)=>res.json())
+      .then((data)=>setTasks(data))
+      .catch((err)=>console.log(err))
       localStorage.setItem("tasks", JSON.stringify(tasks));
     },[tasks])
 
@@ -97,7 +129,7 @@ function App() {
           }
         <p>Status: {task.completed ? "completed" : "not Completed"}</p>
 
-        <button onClick={()=>removingTask(task.id)}>Remove</button>
+        <button onClick={()=>removingTask(task._id)}>Remove</button>
         
         <button onClick={()=>toggletask(task.id)}>Mark Complete</button>
 
